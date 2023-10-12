@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<!@version:  0.0.3>
+
+<html lang="es">
+
+<head>
+  <link rel="stylessheet" type="text/css" href="style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="css/linkPreview.css" />
+  <meta charset="UTF-8">
+  <meta name="description" content="Helheim hidromiel asturiana"/>
+  <meta name="keywords" content="Index">
+  <title>Hidromiel - Helheim</title>
+  <link rel="shortcut icon" href="imgs/helheim2.jpg">
+
+  <link rel="stylesheet" href="estilo.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/linkPreview.js" ></script>
+  <script type="text/javascript" src="js/linkPreviewRetrieve.js" ></script>
+  <script>
+    $(document).ready(function() {
+      $('#retrieveFromDatabase').linkPreviewRetrieve();
+      $('#lp1').linkPreview();
+      $('#lp2').linkPreview({placeholder: "Second Field"});
+    });
+  </script>
+
+</head>
+<body>
+  <div id="cuerpo">
+
+    <header id="cabecera">
+
+      <ul id="logo">
+        <li><a href="Index.html"><img alt='Helheim' src='imgs/logo.png'/></a></li>
+      </ul>
+      <ul class="iconos"> <!-- a la derecha -->
+        <li><a class="iconos2" href='https://www.facebook.com/pages/Hidromiel-Helheim/672370479482217?ref=ts=ts' title='Facebook'><img alt='Facebook' src='imgs/Facebook1.png' /></a></li>
+        <li><a  href='https://twitter.com/HelheimAguamiel' title='Twitter'><img alt='Twitter' src='imgs/Twitter1.png' /></a></li>
+      </ul>
+
+
+    </header>
+
+    <nav id="menu">
+      <ul class='tabs'>
+        <li><a href="Index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </nav>
+
+<section id="blockB">
+</section>
+
+<footer id="pie">
+  <ul>
+    <em><strong>
+      <li><a href="">Aviso Legal</a></li>
+      <li><a href="">Privacidad</a></li>
+      <li><a href="">Enviar sugerencias</a></li>
+      <li><a href="">Terminos</a></li>
+    </strong></em>
+  </ul>
+
+
+  <p>Derechos Reservados &copyHelheim; 2014-2015</p>
+
+</footer>
+</div>
+</body>
+</html>
