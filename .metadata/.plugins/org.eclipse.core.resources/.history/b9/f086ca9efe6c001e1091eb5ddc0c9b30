@@ -1,0 +1,83 @@
+//package aplicacion;
+
+//import entities.Perfil;
+//
+//public class Sesion {
+//
+//	private static long id;
+//	public static Perfil perfil = null;
+//}
+
+package aplicacion;
+
+import entities.Perfil;
+import  entities.Parada;
+import entities.Usuario;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import controllers.Menu;
+
+import static utilidades.Constantes.PATH_STOPS;
+
+public class Sesion {
+	private static boolean sesionActiva = false;
+	private static Parada paradaActual =  null;
+	private static Usuario user = null;
+	private static ArrayList<Parada> listaParadas;
+	private HashMap <String, String> nacionalidades;
+	public static Perfil perfil = null;
+
+
+
+	public Sesion() {
+		importarParadas();
+		new Menu();
+
+	}
+
+	public static boolean iniciarSesion(Usuario usuario) {
+		if (!sesionActiva) {			
+			user = usuario;
+			perfil = usuario.getPerfil()
+			sesionActiva = true;
+			return true;
+		}
+		return false;
+	}
+
+	public static void cerrarSesion() {
+		sesionActiva = false;
+		perfil = null;
+	}
+
+	public static boolean isSesionActiva() {
+		return sesionActiva;
+	}
+
+	public static Perfil getPerfil() {
+		return perfil;
+	}
+
+	public static void importarParadas() {
+		try {
+			File archivo = new File(PATH_STOPS);
+			FileInputStream fis = new FileInputStream(archivo);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			Parada parada;
+			while ((parada = (Parada) ois.readObject()) != null) {
+				listaParadas.add(parada);			}
+
+			ois.close();
+			fis.close();
+		} catch (FileNotFoundException e){
+				System.out.println("No se encuentra el archivo");
+		} catch (EOFException e) {
+				System.out.println("Fin del archivo");
+		} catch (IOException | ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+}

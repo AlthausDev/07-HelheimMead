@@ -1,0 +1,132 @@
+//package controllers;
+//
+//import entities.Parada;
+//import entities.Peregrino;
+//import aplicacion.Sesion;
+//
+//import java.util.Scanner;
+//
+//public class Registrar {
+//
+//    private Scanner sc = new Scanner(System.in);
+//    public void registrar() {
+//        if (Sesion.perfil == null) {
+//            nuevoPeregrino();
+//        } else {
+//            nuevaParada();
+//        }
+//    }
+//
+//
+//    public void nuevoPeregrino() {
+////        System.out.println("Registrar nuevo usuario");
+////        System.out.println("Indique su nombre");
+////        String nombre = sc.nextLine();
+////
+////        System.out.println("Indique una contraseña");
+////        String pass = sc.nextLine();
+////        do {
+////            System.out.println("Repita su contraseña");
+////        } while (!sc.nextLine().equals(pass));
+//        Controller.mapaUsuarios.put(Controller.count++, new Peregrino());
+//    }
+//
+//    private void nuevaParada() {
+//    	FileImputStream file = new FileImputStream();
+//        Controller.mapaUsuarios.put(Controller.count++, new Parada());
+//
+//    }
+//}
+
+package controllers;
+
+import entities.Carnet;
+import entities.Estancia;
+import entities.Parada;
+import entities.Peregrino;
+import aplicacion.Sesion;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Registrar {
+
+    private Scanner sc = new Scanner(System.in);
+
+    public void registrar() {
+        if (Sesion.perfil == null) {
+            nuevoPeregrino();
+        } else {
+            nuevaParada();
+        }
+    }
+
+    public void nuevoPeregrino() {
+        System.out.println("Registrar nuevo usuario - Peregrino");
+        System.out.println("Indique su nombre");
+        String nombre = sc.nextLine();
+        System.out.println("Indique una contraseña");
+        String pass = sc.nextLine();
+
+        String nacionalidad = obtenerNacionalidad(); // Obtener la nacionalidad del usuario
+
+        ArrayList<Parada> paradas = new ArrayList<>(); // Debes llenar esta lista según tu lógica
+        ArrayList<Estancia> estancias = new ArrayList<>(); // Debes llenar esta lista según tu lógica
+
+        Carnet carnet = new Carnet(); // Crea un carnet vacío o con valores por defecto
+
+        Peregrino nuevoPeregrino = new Peregrino(nombre, pass, Sesion.perfil, 0, nacionalidad, carnet, paradas, estancias);
+        Controller.mapaUsuarios.put(Controller.count++, nuevoPeregrino);
+    }
+
+
+
+    private String seleccionarNacionalidad() {
+        // Lógica para seleccionar la nacionalidad
+        return "España"; // Ejemplo, debes adaptarlo a tu lógica
+    }
+
+    private String seleccionarParadaInicial() {
+        // Lógica para seleccionar la parada inicial
+        return "ParadaA"; // Ejemplo, debes adaptarlo a tu lógica
+    }
+
+    private void nuevaParada() {
+        // Código para registrar una nueva parada si es necesario
+        // Debes definir la lógica para crear y configurar una nueva parada aquí
+    }
+
+    public String obtenerNacionalidad() {
+        String nacionalidad = "Desconocido"; // Valor predeterminado
+
+        try {
+            File xmlFile = new File("src/main/resources/paises.xml"); // Ruta al archivo XML
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("pais");
+
+            // Aquí puedes agregar lógica para permitir al usuario seleccionar su nacionalidad
+            // Por ejemplo, puedes mostrar la lista de países y permitir al usuario elegir uno.
+
+            // Si el usuario ha seleccionado un país, asigna el valor a 'nacionalidad'
+            // Ejemplo:
+            // nacionalidad = "España"; // Ajusta esto según la elección del usuario
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nacionalidad;
+    }
+
+}
+
